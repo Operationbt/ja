@@ -11,37 +11,54 @@ const lowOrHi = document.getElementById('lowOrHi');
 const guessField = document.getElementById('guessField');
 const message = document.getElementById("message");
 
-guessSubmit.addEventListener('click', submit);
+guessSubmit.addEventListener("click", submit);
+guessField.addEventListener("keydown", function(e) {
+    if(e.key === "Enter") {
+        submit();
+    }
+})
 function submit() {
     let inputNum = guessField.value;
-    if(inputNum == 0) {
-        message.innerText = 'input Number type!';
+    if(inputNum < 1 || inputNum > 100) {
+        message.innerText = 'input Correct Number! (1~100)';
         return;
     } else {
         message.innerText = '';
 
-        if(inputNum > CORRECT_NUM)
-            lowOrHi.innerText = 'High';
-        else if(inputNum < CORRECT_NUM)
-            lowOrHi.innerText = 'Low';
-        else {
-            message.innerText = "Correct!";
-            guessSubmit.textContent = 'Retry?';
-            guessSubmit.removeEventListener('click', submit);
-            guessSubmit.addEventListener('click', reset);
-        }
-        guessCnt++;
-        lifeCnt.innerText = "Your Life : " + (LIFE - guessCnt);
+        if(inputNum != CORRECT_NUM) {
+            if(inputNum > CORRECT_NUM)
+                lowOrHi.innerText = 'DOWN';
+            else if(inputNum < CORRECT_NUM)
+                lowOrHi.innerText = 'UP';
 
-        if(guessCnt > 1)
-            guesses.innerText += ', ';
-        guesses.innerText += guessField.value;
+            guessCnt++;
+            lifeCnt.innerText = "Your Life : " + (LIFE - guessCnt);
+            
+            //이전에 고른 숫자들 출력
+            if(guessCnt > 1)
+                guesses.innerText += ', ';
+            guesses.innerText += guessField.value;
+    
+            if(guessCnt >= LIFE) {
+                message.innerText = 'Boom!';
+                guessSubmit.textContent = 'Retry?';
+                guessSubmit.removeEventListener("click", submit);
+                guessField.removeEventListener("keydown", submit);
+                guessSubmit.addEventListener("click", reset);
+            }
 
-        if(guessCnt >= LIFE) {
-            message.innerText = 'Boom!';
+            //배경을 단계별로 붉어지게
+            let level = Math.round((255/LIFE)*guessCnt);
+            let color = `rgb(255,${255 - level},${255 - level})`;
+            document.body.style.backgroundColor = color;
+        } else {
+            lowOrHi.style.fontWeight = "bold";
+            lowOrHi.innerText = "Correct!";
+            document.body.style.backgroundColor = `rgb(0, 255, 0)`;
             guessSubmit.textContent = 'Retry?';
-            guessSubmit.removeEventListener('click', submit);
-            guessSubmit.addEventListener('click', reset);
+            guessSubmit.removeEventListener("click", submit);
+            guessField.removeEventListener("keydown", submit);
+            guessSubmit.addEventListener("click", reset);
         }
     }
 }
@@ -53,9 +70,18 @@ function reset() {
     lowOrHi.textContent = '';
     guessField.textContent = '';
     message.textContent = '';
-    guessCnt = 0; 
-    guessSubmit.addEventListener('click', submit);
-    guessSubmit.removeEventListener('click', reset);
+    guessCnt = 0;
+
+    document.body.style.backgroundColor = `rgb(255, 255, 255)`;
+    lowOrHi.style.fontWeight = "normal";
+
+    guessSubmit.addEventListener("click", submit);
+    guessField.addEventListener("keydown", function(e) {
+        if(e.key === "Enter") {
+            submit();
+        }
+    })
+    guessSubmit.removeEventListener("click", reset);
 }
 
 
