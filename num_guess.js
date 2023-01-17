@@ -20,27 +20,27 @@ guessField.addEventListener("keydown", function(e) {
 function submit() {
     let inputNum = guessField.value;
     if(inputNum < 1 || inputNum > 100) {
-        message.innerText = 'input Correct Number! (1~100)';
+        message.textContent = 'input Correct Number! (1~100)';
         return;
     } else {
-        message.innerText = '';
+        message.textContent = '';
 
         if(inputNum != CORRECT_NUM) {
             if(inputNum > CORRECT_NUM)
-                lowOrHi.innerText = 'DOWN';
+                lowOrHi.textContent = 'DOWN';
             else if(inputNum < CORRECT_NUM)
-                lowOrHi.innerText = 'UP';
+                lowOrHi.textContent = 'UP';
 
             guessCnt++;
-            lifeCnt.innerText = "Your Life : " + (LIFE - guessCnt);
+            lifeCnt.textContent = "Your Life : " + (LIFE - guessCnt);
             
             //이전에 고른 숫자들 출력
             if(guessCnt > 1)
-                guesses.innerText += ', ';
-            guesses.innerText += guessField.value;
+                guesses.textContent += ', ';
+            guesses.textContent += guessField.value;
     
             if(guessCnt >= LIFE) {
-                message.innerText = 'Boom!';
+                message.textContent = 'Boom!';
                 guessSubmit.textContent = 'Retry?';
                 guessSubmit.removeEventListener("click", submit);
                 guessField.removeEventListener("keydown", submit);
@@ -53,7 +53,7 @@ function submit() {
             document.body.style.backgroundColor = color;
         } else {
             lowOrHi.style.fontWeight = "bold";
-            lowOrHi.innerText = "Correct!";
+            lowOrHi.textContent = "Correct!";
             document.body.style.backgroundColor = `rgb(0, 255, 0)`;
             guessSubmit.textContent = 'Retry?';
             guessSubmit.removeEventListener("click", submit);
