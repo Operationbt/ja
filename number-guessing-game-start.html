@@ -36,13 +36,16 @@
     <div class="form">
       <label for="guessField">Enter a guess: </label>
       <input type="number" min="1" max="100" required id="guessField" class="guessField">
-      <input type="submit" value="Submit guess" class="guessSubmit">
+      <button type="submit" id="guessSubmit" class="guessSubmit">Submit</button>
+      <label id="message" value="er"></label>
     </div>
 
-    <div class="resultParas">
-      <p class="guesses"></p>
-      <p class="lastResult"></p>
-      <p class="lowOrHi"></p>
+    <div id="resultParas" class="resultParas">
+      <p id="lowOrHi" class="lowOrHi"></p>
+      <p id="lifeCnt"></p>
+      <p id="guesses" class="guesses"></p>
+      <p id="lastResult" class="lastResult"></p>
+      
     </div>
 
     <script src="num_guess.js">
