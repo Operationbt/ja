@@ -39,3 +39,20 @@ function print_diamond(n) {
     }
     return result;
 }
+
+//https://ko.javascript.info/mouse-events-basics#tasks
+//var ul = document.getElementById("ul");
+
+
+var list = document.querySelectorAll("li");
+var selected;
+list.forEach(i => i.onclick = function(e) {
+  console.log(i.innerHTML);
+  
+  if(e.ctrlKey) {
+    i.classList.toggle("selected");
+  } else {
+    list.forEach(j => j.className = "");
+    i.className = "selected";
+  }
+});
