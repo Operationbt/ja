@@ -1,0 +1,14 @@
+{
+  "name": "ja",
+  "version": "1.0.0",
+  "description": "https://operationbt.github.io/ja/number-guessing-game-start.html\r # 리스트 요소 다중선택\r https://operationbt.github.io/ja/listSelect.html",
+  "main": "bobplusmenu.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.6.3"
+  }
+}

@@ -5,35 +5,38 @@ let dateString = date.getFullYear() + "년 "
 
 document.getElementById("date").textContent = dateString;
 
-
 //https://blog.naver.com/babplus123/222374958935 서울숲 롯데IT캐슬점
 const url = "https://blog.naver.com/babplus123/222374958935";
-//const xhr = new XMLHttpRequest();
-//xhr.open("GET", url);
-
-//let one = document.getElementById("blog").contentWindow.document.getElementById("SE-85fbd044-706a-11ed-aba8-17439184eed4");
-//document.getElementById("menu").textContent = one;
 //http://127.0.0.1:5500/listSelect.html
+/*
+const request = new XMLHttpRequest();
+request.open('GET', 'http://naver.com');
+request.onload = function () {
+  console.log(request.responseText);
+};
+request.send();
+request.onerror = function() {
+    console.log("false");
+}
+*/
 
 /*
-fetch(url, {"method":"option"})
-  .then(response => response.text())
-  .then(data => console.log(data))
-  .catch(error => console.error(error));
-*/
-  
 const headers = new Headers({
     'content-Type': 'text/plain',
-    mode : 'no-cors',
 });
-fetch("http://127.0.0.1:5500/listSelect.html", { headers }).then(
+*/
+
+//localhost:8080은 스프링 서버
+//스프링 서버에서 localhost:5500에 CrossOrigin을 명시해줬기 때문에 GET으로 데이터 가져오기 가능
+fetch("http://localhost:8080/getMenu").then(
     (Response) => Response.text()
 ).then(
-    (html) => {
-        let parser = new DOMParser();
-        let doc = parser.parseFromString(html, "text/html");
-        console.log(doc);
-        document.getElementById("menu").textContent = doc.getElementById("ul").childNodes[1].textContent;
+    result => {
+        console.log(result);
+        document.getElementById("menu").textContent = result;
     }
 )
+
+
+
 
