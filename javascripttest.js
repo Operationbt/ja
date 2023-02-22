@@ -39,3 +39,4 @@ function print_diamond(n) {
     }
     return result;
 }
+$("#body_1").text("본문 1 제이쿼리로 변경");
