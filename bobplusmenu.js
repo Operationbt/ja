@@ -3,7 +3,7 @@ let dateString = date.getFullYear() + "년 "
     + (date.getMonth() + 1) + "월 "
     + date.getDate() + "일";
 
-document.getElementById("date").textContent = dateString;
+document.getElementById("date").innerHTML = dateString;
 
 //https://blog.naver.com/babplus123/222374958935 서울숲 롯데IT캐슬점
 const url = "http://localhost:8080/getMenu";
@@ -14,7 +14,7 @@ request.open('GET', url, true);
 request.send();
 request.onload = function () {
   console.log(request.responseText);
-  document.getElementById("menu").textContent = request.responseText;
+  document.getElementById("menu").innerHTML = request.responseText;
 };
 request.onerror = function() {
     console.log("false");
